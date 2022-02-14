@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Mohave:wght@300;400;500&family=Roboto:wght@300&display=swap');
+html,
+body {
+  padding: 0;
+  margin: 0;
+  background-color: #F4F5F6 !important;
+  font-family: 'Mohave', sans-serif !important;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
