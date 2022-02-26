@@ -5,7 +5,7 @@ import {Sidebar, AvatarWrapper, OperatorName, ListItems, ListOption, MenuFooter,
 import { useState } from 'react'
 
 const MenuSidebar = () => {
-    const [show, setShow] = useState(true)
+    const [show, setShow] = useState(false)
     const handleSwitch = () => {
         setShow(!show)
     }
