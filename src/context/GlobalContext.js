@@ -1,6 +1,6 @@
 import React, { createContext, useState } from 'react';
 
-const default_value = {showSidebar: true}
+const default_value = {showSidebar: undefined}
 
 export const GlobalContext = createContext(default_value)
 
