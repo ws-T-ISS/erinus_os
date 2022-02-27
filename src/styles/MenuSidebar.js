@@ -13,12 +13,12 @@ export const Sidebar = styled.aside`
     max-width: 350px;
     color: #00135b;
     background-color: #fff;
-    transform: translateX(${props => props.show ? '0px' : '-350px'});
+    transform: translateX(${props => props.show ? '0px' : '-100%'});
     animation: ${props => props.show ? 'slide-from-left' : 'slide-to-left'} 800ms;
     z-index: 99999;
     @keyframes slide-from-left {
         from{
-            transform: translateX(-350px);
+            transform: translateX(-100%);
         }to{
             transform: translateX(0px)
         }
@@ -28,7 +28,8 @@ export const Sidebar = styled.aside`
         from{
             transform: translateX(0px);
         }to{
-            transform: translateX(-350px)
+            transform: translateX(-100%);
+            display: none;
         }
     }
 

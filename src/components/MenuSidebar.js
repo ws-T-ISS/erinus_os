@@ -1,20 +1,17 @@
 import Image from 'next/image'
-import { Button, CloseButton, IconButton } from '@chakra-ui/react'
-import {MdExitToApp, MdMenu} from 'react-icons/md'
+import { Button, CloseButton } from '@chakra-ui/react'
+import {MdExitToApp} from 'react-icons/md'
 import {Sidebar, AvatarWrapper, OperatorName, ListItems, ListOption, MenuFooter, CloseSidebar} from '../styles/MenuSidebar'
-import { useState } from 'react'
+import { useContext } from 'react'
+import { GlobalContext } from '../context/GlobalContext'
 
 const MenuSidebar = () => {
-    const [show, setShow] = useState(false)
-    const handleSwitch = () => {
-        setShow(!show)
-    }
-
+    const {showSidebar, handleDeactiveSidebar} = useContext(GlobalContext)
     return (
         <>
-            <Sidebar show={show}>
+            <Sidebar show={showSidebar}>
                 <CloseSidebar>
-                    <CloseButton variant="ghost" onClick={handleSwitch}/>
+                    <CloseButton variant="ghost" onClick={handleDeactiveSidebar}/>
                 </CloseSidebar>
                 <main>
                     <AvatarWrapper>

@@ -43,7 +43,8 @@ export const LinkTopbar = styled.li`
     align-items: center;
     height: 100%;
     padding: .25rem;
-    a{
+    a, button{
+        background-color: none;
         font-size: larger;
         :hover{
             border-bottom: solid 3px #00135b;

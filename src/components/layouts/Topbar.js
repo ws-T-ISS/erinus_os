@@ -1,9 +1,11 @@
-import { Flex, Box, Heading, Button, Spacer, Container, HStack, Text, InputGroup, Input, Select } from "@chakra-ui/react"
 import Image from "next/image"
 import Link from "next/link"
+import { useContext } from 'react'
+import { GlobalContext } from '../../context/GlobalContext'
 import { ContentTopbar, LinksTopbar, LinkTopbar, LogoTopbar, MainTopbar } from "../../styles/TopbarStyled"
 
 const Topbar = () => {
+    const {handleActiveSidebar} = useContext(GlobalContext)
     return (
         <MainTopbar>
             <ContentTopbar>
@@ -22,9 +24,7 @@ const Topbar = () => {
                         </Link>
                     </LinkTopbar>
                     <LinkTopbar>
-                        <Link href="/conta">
-                            <a>Conta</a>
-                        </Link>
+                        <button onClick={handleActiveSidebar}>Conta</button>
                     </LinkTopbar>
                 </LinksTopbar>
             </ContentTopbar>
