@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router'
 import {ChakraProvider} from '@chakra-ui/react'
 import Topbar from '../components/layouts/Topbar'
 import MenuSidebar from '../components/MenuSidebar'
@@ -6,10 +7,11 @@ import '../styles/globals.css'
 
 
 function MyApp({ Component, pageProps }) {
+  const router = useRouter()
   return (
     <ChakraProvider>
       <GlobalProvider>
-        <Topbar />
+        {router.pathname !== "/login" ? <Topbar /> : null }
         <MenuSidebar />
         <Component {...pageProps} />
       </GlobalProvider>
