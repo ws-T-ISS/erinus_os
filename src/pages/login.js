@@ -1,18 +1,15 @@
 import Image from 'next/image'
 import Head from 'next/head';
-import { useRouter } from 'next/router';
 import { Heading, FormLabel, Input, Box, Button } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form';
-import {BsFillKeyFill} from 'react-icons'
+import {useContext} from 'react'
+import { AuthContext } from '../context/AuthContext';
 import { Background } from "../styles/FormLogin";
 
 export default function Login(){
     const {register, handleSubmit} = useForm()
-    const router = useRouter()
-    const handleLogin = (data) => {
-        console.log(data)
-        router.push("/")
-    }
+    const {handleLogin} = useContext(AuthContext)
+    
     return (
         <>  
             <Head>

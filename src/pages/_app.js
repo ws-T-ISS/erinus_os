@@ -4,6 +4,7 @@ import Topbar from '../components/layouts/Topbar'
 import MenuSidebar from '../components/MenuSidebar'
 import { GlobalProvider } from '../context/GlobalContext'
 import '../styles/globals.css'
+import { AuthProvider } from '../context/AuthContext'
 
 
 function MyApp({ Component, pageProps }) {
@@ -11,9 +12,11 @@ function MyApp({ Component, pageProps }) {
   return (
     <ChakraProvider>
       <GlobalProvider>
-        {router.pathname !== "/login" ? <Topbar /> : null }
-        <MenuSidebar />
-        <Component {...pageProps} />
+        <AuthProvider>
+            {router.pathname !== "/login" ? <Topbar /> : null }
+            <MenuSidebar />
+            <Component {...pageProps} />
+        </AuthProvider>
       </GlobalProvider>
     </ChakraProvider>
   )

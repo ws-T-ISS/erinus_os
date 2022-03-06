@@ -12,8 +12,16 @@ export const GlobalProvider = ({children}) => {
     function handleDeactiveSidebar(){
         setShowSidebar(false)
     }
+    function handleResetSidebar(){
+        setShowSidebar(undefined)
+    }
     return (
-        <GlobalContext.Provider value={{showSidebar, handleActiveSidebar, handleDeactiveSidebar}}>
+        <GlobalContext.Provider value={{
+            showSidebar,
+            handleActiveSidebar,
+            handleDeactiveSidebar,
+            handleResetSidebar
+        }}>
             {children}
         </GlobalContext.Provider>
     )

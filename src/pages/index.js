@@ -1,8 +1,11 @@
-import { Container, Heading, HStack, Text, Wrap } from '@chakra-ui/react'
+import { useContext } from 'react'
+import { Container, Text, Wrap } from '@chakra-ui/react'
 import Head from 'next/head'
 import Card from '../components/Card'
+import { AuthContext } from '../context/AuthContext'
 
 export default function Home() {
+    const {user} = useContext(AuthContext)
     return (
         <div>
             <Head>
@@ -12,7 +15,7 @@ export default function Home() {
             </Head>
             <header>
                 <Container marginTop="7" maxW="container.xl">
-                    <Text fontSize="24pt" color="#00135b">Seja bem vindo <b>{"Usuário"}</b>.</Text>
+                    <Text fontSize="24pt" color="#00135b">Seja bem vindo <b>{user.nome}</b>.</Text>
                 </Container>
             </header>
             <main>

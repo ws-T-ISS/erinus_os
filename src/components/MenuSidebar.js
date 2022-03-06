@@ -3,13 +3,15 @@ import { Button, CloseButton } from '@chakra-ui/react'
 import {MdExitToApp} from 'react-icons/md'
 import {Sidebar, AvatarWrapper, OperatorName, ListItems, ListOption, MenuFooter, CloseSidebar} from '../styles/MenuSidebar'
 import { useContext } from 'react'
+import { AuthContext } from '../context/AuthContext';
 import { GlobalContext } from '../context/GlobalContext'
 
 const MenuSidebar = () => {
     const {showSidebar, handleDeactiveSidebar} = useContext(GlobalContext)
+    const {user, logged, handleLogout} = useContext(AuthContext)
     return (
         <>
-            {typeof showSidebar == 'undefined' ? 
+            {typeof showSidebar == 'undefined' || !logged ? 
                 null :
                 <Sidebar show={showSidebar}>
                     <CloseSidebar>
@@ -19,15 +21,15 @@ const MenuSidebar = () => {
                         <AvatarWrapper>
                             <Image src="/Avatar.svg" alt="Foto do operador" width={100} height={100} />
                         </AvatarWrapper>
-                        <OperatorName>Antônio Carlos Magalhães</OperatorName>
+                        <OperatorName>{user.nome}</OperatorName>
                         <ListItems>
                             <ListOption>Painel de solicitações</ListOption>
                             <ListOption>Alterar senha</ListOption>
                         </ListItems>
                     </main>
                     <MenuFooter>
-                        <span className='description-version'>ERINUS | Versão: 1.0.0</span>
-                        <Button rightIcon={<MdExitToApp />} variant={'solid'} colorScheme="red">Sair</Button>
+                        <span className='description-version'>ERINUS | Versão: 0.3beta</span>
+                        <Button onClick={handleLogout} rightIcon={<MdExitToApp />} variant={'solid'} colorScheme="red">Sair</Button>
                     </MenuFooter>
                 </Sidebar>
             }
