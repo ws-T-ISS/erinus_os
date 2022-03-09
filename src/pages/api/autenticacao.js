@@ -1,7 +1,8 @@
 import nc from 'next-connect'
 import {compare} from 'bcrypt'
-import {setCookies} from 'cookies-next'
+import {getCookie, setCookies} from 'cookies-next'
 import Operador from '../../database/models/operador'
+import Sessao from '../../database/models/sessao'
 import { CreateToken } from '../../tools/Token'
 const handler = nc({
     onError: (err, req, res, next) => {
@@ -26,11 +27,30 @@ handler.post(async (req, res) => {
     const match_password = await compare(senha, query_find_operator.senha)
     if (match_password){
         const token = CreateToken({...query_find_operator.dataValues, senha: undefined})
-        setCookies('auth', token, {req, res, httpOnly: true})
+        const create_session = await Sessao.create({cd_usuario: query_find_operator.codigo, token: token}, {returning: true})
+        setCookies("erinus-S_ID", create_session.codigo, {req, res, httpOnly: true})
+        setCookies('erinus-S_TOKEN', token, {req, res, httpOnly: true})
         res.status(201).json({mensagem: "Encontrado", usuario: {...query_find_operator.dataValues, senha: undefined}, token: token})
     }else{
         res.status(200).json({mensagem: "Usuário ou senha incorretos", erro: true})
     }
+})
+
+handler.get(async (req, res) => {
+    const session_id = getCookie("erinus-S_ID", {req, res})
+    const token = getCookie("erinus-S_TOKEN", {req, res})
+    if(!session_id && !token){
+        res.status(200).json({mensagem: "Está faltando dados de autenticação!", erro: true})
+        return
+    }
+
+    const search_session = await Sessao.findByPk(session_id)
+    if(!search_session){
+        res.status(200).json({mensagem: "Sessão não localizada.", erro: true})
+        return
+    }
+    const search_user = await Operador.findOne({where: {codigo: search_session.cd_usuario}})
+    res.status(201).json({mensagem: "Encontrado", usuario: {...search_user.dataValues, senha: undefined}})
 })
 
 export default handler
